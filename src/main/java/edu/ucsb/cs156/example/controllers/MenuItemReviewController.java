@@ -57,7 +57,7 @@ public class MenuItemReviewController extends ApiController {
     @ApiOperation(value = "Create a new date")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
-    public MenuItemReview postUCSBDate(
+    public MenuItemReview postMenuItemReview(
             @ApiParam("itemId") @RequestParam Long itemId,
             @ApiParam("reviewerEmail") @RequestParam String reviewerEmail,
             @ApiParam("stars") @RequestParam int stars,
@@ -98,7 +98,7 @@ public class MenuItemReviewController extends ApiController {
     @ApiOperation(value = "Update a single review")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
-    public MenuItemReview updateUCSBDate(
+    public MenuItemReview updateMenuItemReview(
             @ApiParam("id") @RequestParam Long id,
             @RequestBody @Valid MenuItemReview incoming) {
 
