@@ -28,5 +28,4 @@ public class HelpRequest {
   private String explanation;
   private boolean solved;
   private LocalDateTime requestTime;
-  private LocalDateTime localDateTime;
 }
