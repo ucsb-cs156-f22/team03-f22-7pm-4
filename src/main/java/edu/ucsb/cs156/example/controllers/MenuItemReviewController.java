@@ -35,7 +35,7 @@ public class MenuItemReviewController extends ApiController {
     @Autowired
     MenuItemReviewRepository menuItemReviewRepository;
 
-    @ApiOperation(value = "Find reviews on menu item")
+    @ApiOperation(value = "Find all reviews on menu item")
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")
     public Iterable<MenuItemReview> allReviews() {
@@ -54,7 +54,7 @@ public class MenuItemReviewController extends ApiController {
             return menuItemReview;
     }
 
-    @ApiOperation(value = "Create a new date")
+    @ApiOperation(value = "Create a new menu item review")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
     public MenuItemReview postMenuItemReview(
