@@ -144,7 +144,7 @@ public class HelpRequestTests extends ControllerTestCase {
                                 .tableOrBreakoutRoom("11")
                                 .requestTime(ldt1)
                                 .explanation("Heroku problems")
-                                .solved(false)
+                                .solved(true)
                                 .build();
 
                 LocalDateTime ldt2 = LocalDateTime.parse("2022-03-11T00:00:00");
@@ -195,7 +195,7 @@ public class HelpRequestTests extends ControllerTestCase {
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/helprequest/post?requesterEmail=ldelplaya@ucsb.edu&teamId=s22-6pm-3&tableOrBreakoutRoom=11&requestTime=2022-01-03T00:00:00&explanation=Heroku problems&solved=false")
+                                post("/api/helprequest/post?requesterEmail=ldelplaya@ucsb.edu&teamId=s22-6pm-3&tableOrBreakoutRoom=11&requestTime=2022-01-03T00:00:00&explanation=Heroku problems&solved=true")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
