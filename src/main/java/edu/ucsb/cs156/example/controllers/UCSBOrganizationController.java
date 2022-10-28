@@ -80,16 +80,16 @@ public class UCSBOrganization extends ApiController {
         return savedUcsbOrganization;
     }
 
-    @ApiOperation(value = "Delete a UCSBDate")
+    @ApiOperation(value = "Delete a UCSBOrganization")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("")
-    public Object deleteUCSBDate(
+    public Object deleteUCSBOrganization(
             @ApiParam("id") @RequestParam Long id) {
-        UCSBDate ucsbDate = ucsbDateRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(UCSBDate.class, id));
+        UCSBOrganization ucsbOrg = ucsbOrganizationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(UCSBOrganization.class, id));
 
-        ucsbDateRepository.delete(ucsbDate);
-        return genericMessage("UCSBDate with id %s deleted".formatted(id));
+        ucsbDateRepository.delete(ucsbOrg);
+        return genericMessage("UCSBOrganization with id %s deleted".formatted(id));
     }
 
     @ApiOperation(value = "Update a single date")
