@@ -276,7 +276,7 @@ public class RecommendationControllerTests extends ControllerTestCase {
                                 .explanation("recommendation is for xyz1 application")
                                 .dateRequested(DRdate1)
                                 .dateNeeded(DNdate1)
-                                .done(false)
+                                .done(true)
                                 .build();
 
                 Recommendation recommendationEdited = Recommendation.builder()
@@ -322,7 +322,7 @@ public class RecommendationControllerTests extends ControllerTestCase {
                                 .explanation("recommendation is for xyz2 application")
                                 .dateRequested(DRdate2)
                                 .dateNeeded(DNdate2)
-                                .done(false)
+                                .done(true)
                                 .build();
 
                 String requestBody = mapper.writeValueAsString(recommendationEditedDate);
