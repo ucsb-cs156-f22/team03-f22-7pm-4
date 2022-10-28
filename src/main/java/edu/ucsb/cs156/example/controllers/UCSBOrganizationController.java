@@ -67,16 +67,17 @@ public class UCSBOrganization extends ApiController {
         // For an explanation of @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
         // See: https://www.baeldung.com/spring-date-parameters
 
-        log.info("localDateTime={}", localDateTime);
+        UCSBOrganization ucsbOrganization = new UCSBOrganization();
+        ucsbOrganization.setOrgCode(orgCode);
+        ucsbOrganization.setOrgTranslationShort(orgTranslationShort);
+        ucsbOrganization.setOrgTranslation(orgTranslation);
+        ucsbOrganization.setInactive(inactive);
 
-        UCSBDate ucsbDate = new UCSBDate();
-        ucsbDate.setQuarterYYYYQ(quarterYYYYQ);
-        ucsbDate.setName(name);
-        ucsbDate.setLocalDateTime(localDateTime);
 
-        UCSBDate savedUcsbDate = ucsbDateRepository.save(ucsbDate);
 
-        return savedUcsbDate;
+        UCSBOrganization savedUcsbOrganization = ucsbOrganizationRepository.save(ucsbOrganization);
+
+        return savedUcsbOrganization;
     }
 
     @ApiOperation(value = "Delete a UCSBDate")
