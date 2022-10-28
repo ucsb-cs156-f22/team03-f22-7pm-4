@@ -92,22 +92,23 @@ public class UCSBOrganization extends ApiController {
         return genericMessage("UCSBOrganization with id %s deleted".formatted(id));
     }
 
-    @ApiOperation(value = "Update a single date")
+    @ApiOperation(value = "Update a single organization")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
-    public UCSBDate updateUCSBDate(
+    public UCSBOrganization updateUCSBOrganization(
             @ApiParam("id") @RequestParam Long id,
-            @RequestBody @Valid UCSBDate incoming) {
+            @RequestBody @Valid UCSBOrganization incoming) {
 
-        UCSBDate ucsbDate = ucsbDateRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(UCSBDate.class, id));
+        UCSBOrganization ucsbOrg = ucsbOrganizationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(UCSBOrganization.class, id));
 
-        ucsbDate.setQuarterYYYYQ(incoming.getQuarterYYYYQ());
-        ucsbDate.setName(incoming.getName());
-        ucsbDate.setLocalDateTime(incoming.getLocalDateTime());
+        ucsbOrg.setOrgCode(incoming.getOrgCode());
+        ucsbOrg.setOrgTranslationShort(incoming.getOrgTranslationShort());
+        ucsbOrg.setOrgTranslation(incoming.getOrgTranslation());
+        ucsbOrg.setInactive(incoming.getInactive());
 
-        ucsbDateRepository.save(ucsbDate);
+        ucsbOrganizationRepository.save(ucsbOrg);
 
-        return ucsbDate;
+        return ucsbOrg;
     }
 }
