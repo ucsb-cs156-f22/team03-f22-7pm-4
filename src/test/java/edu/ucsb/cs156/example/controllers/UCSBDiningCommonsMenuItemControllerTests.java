@@ -33,7 +33,7 @@ import static org.mockito.Mockito.when;
 @WebMvcTest(controllers = UCSBDiningCommonsMenuItemController.class)
 @Import(TestConfig.class)
 public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase{
-    
+
         @MockBean
         UCSBDiningCommonsMenuItemRepository ucsbDiningCommonsMenuItemRepository;
 
@@ -80,7 +80,6 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
         public void test_that_logged_in_user_can_get_by_id_when_the_id_exists() throws Exception {
 
             UCSBDiningCommonsMenuItem menuItem = UCSBDiningCommonsMenuItem.builder()
-                                .id(1)
                                 .name("dsfsdf")
                                 .diningCommonsCode("dsfsdfd")
                                 .station("dsfsdf")
@@ -118,21 +117,19 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
 
         @WithMockUser(roles = { "USER" })
         @Test
-        public void logged_in_user_can_get_all_ucsbdiningcommons() throws Exception {
+        public void logged_in_user_can_get_all_ucsbdiningcommons_menu_item() throws Exception {
 
                 // arrange
 
                 UCSBDiningCommonsMenuItem carrillo = UCSBDiningCommonsMenuItem.builder()
-                                .id(2)
                                 .name("dsfsdf")
                                 .diningCommonsCode("dsfsdfd")
                                 .station("dsfsdf")
                                 .build();
 
                 UCSBDiningCommonsMenuItem dlg = UCSBDiningCommonsMenuItem.builder()
-                                .id(3)
                                 .name("dsfsdf")
-                                .diningCommonsCode("dsfsdfd")
+                                .diningCommonsCode("dsfsdfjd")
                                 .station("dsfsdf")
                                 .build();
 
@@ -155,9 +152,8 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void an_admin_user_can_post_a_new_commons() throws Exception {
+        public void an_admin_user_can_post_a_new_commons_menu_item() throws Exception {
                 UCSBDiningCommonsMenuItem ortega = UCSBDiningCommonsMenuItem.builder()
-                .id(3)
                 .name("dsfsdf")
                 .diningCommonsCode("dsfsdfd")
                 .station("dsfsdf")
@@ -166,7 +162,7 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
                 when(ucsbDiningCommonsMenuItemRepository.save(eq(ortega))).thenReturn(ortega);
 
                 MvcResult response = mockMvc.perform(
-                                post("/api/UCSBDiningCommonsMenuItem/post?id=3&name=dsfsdf&diningCommonsCode=dsfsdfd&station=dsfsdf")
+                                post("/api/UCSBDiningCommonsMenuItem/post?name=dsfsdf&diningCommonsCode=dsfsdfd&station=dsfsdf")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
@@ -175,24 +171,23 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
                 String responseString = response.getResponse().getContentAsString();
                 assertEquals(expectedJson, responseString);
         }
-        
+
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
         public void admin_can_delete_a_date() throws Exception {
             UCSBDiningCommonsMenuItem ortega = UCSBDiningCommonsMenuItem.builder()
-                .id(3)
                 .name("dsfsdf")
                 .diningCommonsCode("dsfsdfd")
                 .station("dsfsdf")
                 .build();
-            
+
                 when(ucsbDiningCommonsMenuItemRepository.findById(eq((long)3))).thenReturn(Optional.of(ortega));
-            
+
                 MvcResult response = mockMvc.perform(
                                 delete("/api/UCSBDiningCommonsMenuItem/?id=3")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
-                
+
                 verify(ucsbDiningCommonsMenuItemRepository, times(1)).findById((long)3);
                 verify(ucsbDiningCommonsMenuItemRepository, times(1)).delete(any());
 
@@ -202,7 +197,7 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_tries_to_delete_non_existant_commons_and_gets_right_error_message()
+        public void admin_tries_to_delete_non_existant_commons_menu_item_and_gets_right_error_message()
                         throws Exception {
                 // arrange
 
@@ -222,18 +217,16 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_can_edit_an_existing_commons() throws Exception {
+        public void admin_can_edit_an_existing_commons_menu_item() throws Exception {
                 // arrange
 
                 UCSBDiningCommonsMenuItem carrilloOrig = UCSBDiningCommonsMenuItem.builder()
-                .id(3)
                 .name("dsfsdf")
                 .diningCommonsCode("dsfsdfd")
                 .station("dsfsdf")
                 .build();
 
                 UCSBDiningCommonsMenuItem carrilloEdited = UCSBDiningCommonsMenuItem.builder()
-                .id(3)
                 .name("dsfsdfdsd")
                 .diningCommonsCode("dsfsdddfd")
                 .station("dsfsdddf")
@@ -265,7 +258,6 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
                 // arrange
 
                 UCSBDiningCommonsMenuItem editedCommons = UCSBDiningCommonsMenuItem.builder()
-                .id(3)
                 .name("dsfsdfdsd")
                 .diningCommonsCode("dsfsdddfd")
                 .station("dsfsdddf")

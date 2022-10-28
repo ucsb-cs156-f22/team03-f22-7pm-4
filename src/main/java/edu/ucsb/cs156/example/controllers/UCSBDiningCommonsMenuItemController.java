@@ -1,9 +1,10 @@
 package edu.ucsb.cs156.example.controllers;
 
 import edu.ucsb.cs156.example.entities.UCSBDiningCommonsMenuItem;
-import edu.ucsb.cs156.example.entities.UCSBDate.UCSBDateBuilder;
+import edu.ucsb.cs156.example.entities.UCSBDiningCommons;
 import edu.ucsb.cs156.example.errors.EntityNotFoundException;
 import edu.ucsb.cs156.example.repositories.UCSBDiningCommonsMenuItemRepository;
+import edu.ucsb.cs156.example.repositories.UCSBDiningCommonsRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -43,7 +44,7 @@ public class UCSBDiningCommonsMenuItemController extends ApiController{
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("")
     public UCSBDiningCommonsMenuItem getByID(
-            @ApiParam("id") @RequestParam long id) {
+            @ApiParam("id") @RequestParam Long id) {
         UCSBDiningCommonsMenuItem menuitems = ucsbDiningCommonsMenuItemRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(UCSBDiningCommonsMenuItem.class, id));
 
@@ -53,8 +54,7 @@ public class UCSBDiningCommonsMenuItemController extends ApiController{
     @ApiOperation(value = "Create a new commons menu")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
-    public UCSBDiningCommonsMenuItem postCommons(
-        @ApiParam("id") @RequestParam long id,
+    public UCSBDiningCommonsMenuItem postMenuItem(
         @ApiParam("diningCommonsCode") @RequestParam String diningCommonsCode,
         @ApiParam("name") @RequestParam String name,
         @ApiParam("station") @RequestParam String station
@@ -62,7 +62,6 @@ public class UCSBDiningCommonsMenuItemController extends ApiController{
         {
         
         UCSBDiningCommonsMenuItem menuItem = new UCSBDiningCommonsMenuItem();
-        menuItem.setId(id);
         menuItem.setDiningCommonsCode(diningCommonsCode);
         menuItem.setName(name);
         menuItem.setStation(station);
@@ -95,7 +94,6 @@ public class UCSBDiningCommonsMenuItemController extends ApiController{
                 .orElseThrow(() -> new EntityNotFoundException(UCSBDiningCommonsMenuItem.class, id));
 
 
-        commons.setId(incoming.getId());
         commons.setName(incoming.getName());  
         commons.setDiningCommonsCode(incoming.getDiningCommonsCode());
         commons.setStation(incoming.getStation());
