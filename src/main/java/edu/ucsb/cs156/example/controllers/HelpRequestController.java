@@ -1,8 +1,8 @@
 package edu.ucsb.cs156.example.controllers;
 
-import edu.ucsb.cs156.example.entities.UCSBDate;
+import edu.ucsb.cs156.example.entities.HelpRequest;
 import edu.ucsb.cs156.example.errors.EntityNotFoundException;
-import edu.ucsb.cs156.example.repositories.UCSBDateRepository;
+import edu.ucsb.cs156.example.repositories.HelpRequestRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -49,7 +49,7 @@ public class HelpRequestController extends ApiController {
     public HelpRequest getById(
             @ApiParam("id") @RequestParam Long id) {
         HelpRequest helpRequest = helpRequestRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(helpRequest.class, id));
+                .orElseThrow(() -> new EntityNotFoundException(HelpRequest.class, id));
 
         return helpRequest;
     }
@@ -99,7 +99,7 @@ public class HelpRequestController extends ApiController {
     @ApiOperation(value = "Update a single help requesr")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
-    public UCSBDate updateHelpRequest(
+    public HelpRequest updateHelpRequest(
             @ApiParam("id") @RequestParam Long id,
             @RequestBody @Valid HelpRequest incoming) {
 
