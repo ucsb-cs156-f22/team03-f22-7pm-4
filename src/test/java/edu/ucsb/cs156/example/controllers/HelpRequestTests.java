@@ -144,7 +144,7 @@ public class HelpRequestTests extends ControllerTestCase {
                                 .tableOrBreakoutRoom("11")
                                 .requestTime(ldt1)
                                 .explanation("Heroku problems")
-                                .solved(true)
+                                .solved(false)
                                 .build();
 
                 LocalDateTime ldt2 = LocalDateTime.parse("2022-03-11T00:00:00");
@@ -188,7 +188,7 @@ public class HelpRequestTests extends ControllerTestCase {
                                 .tableOrBreakoutRoom("11")
                                 .requestTime(ldt1)
                                 .explanation("Heroku problems")
-                                .solved(false)
+                                .solved(true)
                                 .build();
 
                 when(helpRequestRepository.save(eq(helpRequest1))).thenReturn(helpRequest1);
