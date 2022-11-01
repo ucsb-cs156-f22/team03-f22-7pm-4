@@ -64,8 +64,6 @@ public class UCSBOrganization extends ApiController {
             @ApiParam("inactive (full name of organization, true or false)") @RequestParam boolean inactive)
             throws JsonProcessingException {
 
-        // For an explanation of @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-        // See: https://www.baeldung.com/spring-date-parameters
 
         UCSBOrganization ucsbOrganization = new UCSBOrganization();
         ucsbOrganization.setOrgCode(orgCode);
