@@ -33,7 +33,7 @@ import java.time.LocalDateTime;
 public class UCSBOrganization extends ApiController {
 
     @Autowired
-    UCSBOrganization ucsbOrganization;
+    UCSBOrganizationRepository ucsbOrganizationRepository;
 
     @ApiOperation(value = "List all ucsb organizations")
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -61,8 +61,8 @@ public class UCSBOrganization extends ApiController {
             @ApiParam("orgCode (organization abbreviation)") @RequestParam String orgCode,
             @ApiParam("orgTranslationShort (organization name for short)") @RequestParam String orgTranslationShort,
             @ApiParam("orgTranslation (full name of organization)") @RequestParam String orgTranslation,
-            @ApiParam("inactive (full name of organization, true or false)") @RequestParam boolean inactive)
-            throws JsonProcessingException {
+            @ApiParam("inactive (true or false)") @RequestParam boolean inactive)
+            {
 
 
         UCSBOrganization ucsbOrganization = new UCSBOrganization();
@@ -100,7 +100,6 @@ public class UCSBOrganization extends ApiController {
         UCSBOrganization ucsbOrg = ucsbOrganizationRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(UCSBOrganization.class, id));
 
-        ucsbOrg.setOrgCode(incoming.getOrgCode());
         ucsbOrg.setOrgTranslationShort(incoming.getOrgTranslationShort());
         ucsbOrg.setOrgTranslation(incoming.getOrgTranslation());
         ucsbOrg.setInactive(incoming.getInactive());
