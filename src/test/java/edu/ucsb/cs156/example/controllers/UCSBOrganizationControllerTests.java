@@ -44,14 +44,14 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
 
         @Test
         public void logged_out_users_cannot_get_all() throws Exception {
-                mockMvc.perform(get("/api/UCSBOrganization/all"))
+                mockMvc.perform(get("/api/ucsborganization/all"))
                                 .andExpect(status().is(403)); // logged out users can't get all
         }
 
         @WithMockUser(roles = { "USER" })
         @Test
         public void logged_in_users_can_get_all() throws Exception {
-                mockMvc.perform(get("/api/UCSBOrganization/all"))
+                mockMvc.perform(get("/api/ucsborganization/all"))
                                 .andExpect(status().is(200)); // logged
         }
 
@@ -153,7 +153,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
                 when(ucsbOrganizationRepository.findAll()).thenReturn(expectedOrgs);
 
                 // act
-                MvcResult response = mockMvc.perform(get("/api/UCSBOrganization/all"))
+                MvcResult response = mockMvc.perform(get("/api/ucsborganization/all"))
                                 .andExpect(status().isOk()).andReturn();
 
                 // assert
@@ -180,7 +180,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/UCSBOrganization/post?orgCode=test&orgTranslationShort=test&orgTranslation=test&inactive=true").with(csrf()))
+                                post("/api/ucsborganization/post?orgCode=test&orgTranslationShort=test&orgTranslation=test&inactive=true").with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
                 // assert
@@ -251,7 +251,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
                                 .build();
 
                 UCSBOrganization test1_2 = UCSBOrganization.builder()
-                                .orgCode("test2")
+                                .orgCode("test1")
                                 .orgTranslationShort("test2")
                                 .orgTranslation("test2")
                                 .inactive(false)
