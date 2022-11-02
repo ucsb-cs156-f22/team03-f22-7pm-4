@@ -208,5 +208,55 @@ public class RecommendationControllerTests extends ControllerTestCase {
                 String responseString = response.getResponse().getContentAsString();
                 assertEquals(expectedJson, responseString);
         }
+        @WithMockUser(roles = { "ADMIN", "USER" })
+        @Test
+        public void admin_can_delete_a_recommendation() throws Exception {
+                // arrange
+                LocalDateTime DRdate1 = LocalDateTime.parse("2022-10-26T22:28:28.373");
+                LocalDateTime DNdate1 = LocalDateTime.parse("2022-10-26T22:28:21.725");
 
+                Recommendation one = Recommendation.builder()
+                                .requesterEmail("requester1@gmail.com")
+                                .professorEmail("professor1@gmail.com")
+                                .explanation("recommendation is for xyz1 application")
+                                .dateRequested(DRdate1)
+                                .dateNeeded(DNdate1)
+                                .done(false)
+                                .build();
+
+                when(recommendationRepository.findById(eq(1L))).thenReturn(Optional.of(one));
+
+                // act
+                MvcResult response = mockMvc.perform(
+                                delete("/api/Recommendation?id=1")
+                                                .with(csrf()))
+                                .andExpect(status().isOk()).andReturn();
+
+                // assert
+                verify(recommendationRepository, times(1)).findById(1L);
+                verify(recommendationRepository, times(1)).delete(any());
+
+                Map<String, Object> json = responseToJson(response);
+                assertEquals("Recommendation with id 1 deleted", json.get("message"));
+        }
+
+        @WithMockUser(roles = { "ADMIN", "USER" })
+        @Test
+        public void admin_tries_to_delete_non_existant_ucsbdate_and_gets_right_error_message()
+                        throws Exception {
+                // arrange
+
+                when(recommendationRepository.findById(eq(1L))).thenReturn(Optional.empty());
+
+                // act
+                MvcResult response = mockMvc.perform(
+                                delete("/api/Recommendation?id=1")
+                                                .with(csrf()))
+                                .andExpect(status().isNotFound()).andReturn();
+
+                // assert
+                verify(recommendationRepository, times(1)).findById(1L);
+                Map<String, Object> json = responseToJson(response);
+                assertEquals("Recommendation with id 1 not found", json.get("message"));
+        }
 }
