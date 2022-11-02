@@ -281,7 +281,7 @@ public class HelpRequestTests extends ControllerTestCase {
                                 .tableOrBreakoutRoom("13")
                                 .requestTime(ldt2)
                                 .explanation("Merge conflict")
-                                .solved(false)
+                                .solved(true)
                                 .build();
 
 
