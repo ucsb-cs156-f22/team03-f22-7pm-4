@@ -32,8 +32,6 @@ describe("HelpRequestsIndexPage tests", () => {
 
     const axiosMock =new AxiosMockAdapter(axios);
 
-    const testId = "DiningCommonsTable";
-
     const setupUserOnly = () => {
         axiosMock.reset();
         axiosMock.resetHistory();
