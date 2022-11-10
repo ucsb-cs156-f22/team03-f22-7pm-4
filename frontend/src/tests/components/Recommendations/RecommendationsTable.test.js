@@ -68,7 +68,7 @@ describe("RecommendationsTable tests", () => {
 
     );
 
-    const expectedHeaders = ["id", "Date Needed", "Date Requested", "Done?", "Explanation", "Professor\'s Email", "Requester\'s Email"];
+    const expectedHeaders = ["id", "Date Needed", "Date Requested", "Done?", "Explanation", "Professor's Email", "Requester's Email"];
     const expectedFields = ["id", "dateNeeded", "dateRequested", "done", "explanation", "professorEmail", "requesterEmail"];
     const testId = "RecommendationsTable";
 
