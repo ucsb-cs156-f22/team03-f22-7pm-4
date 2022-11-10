@@ -1,4 +1,4 @@
-import {  fireEvent, render, waitFor } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { helpRequestsFixtures } from "fixtures/helpRequestsFixtures";
 import HelpRequestsTable from "main/components/HelpRequests/HelpRequestsTable";
 import { QueryClient, QueryClientProvider } from "react-query";
