@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { _fireEvent, render, _waitFor } from "@testing-library/react";
 import { recommendationsFixtures } from "fixtures/recommendationsFixtures";
 import RecommendationsTable from "main/components/Recommendations/RecommendationsTable"
 import { QueryClient, QueryClientProvider } from "react-query";
