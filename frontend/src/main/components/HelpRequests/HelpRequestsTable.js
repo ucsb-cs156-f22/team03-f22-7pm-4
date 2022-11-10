@@ -1,7 +1,15 @@
-import OurTable, { ButtonColumn } from "main/components/OurTable";
+import OurTable, { ButtonColumn} from "main/components/OurTable";
+import { useNavigate } from "react-router-dom";
+import { hasRole } from "main/utils/currentUser";
 
 
 export default function HelpRequestsTable({ helpRequests, currentUser }) {
+
+    const navigate = useNavigate();
+
+    const editCallback = (cell) => {
+        navigate(`/helpRequests/edit/${cell.row.values.id}`)
+    }
 
     const columns = [
         {
@@ -34,6 +42,14 @@ export default function HelpRequestsTable({ helpRequests, currentUser }) {
             accessor: (row, _rowIndex) => String(row.solved) 
         }
     ];
+
+
+    const columnsIfAdmin = [
+        ...columns,
+        ButtonColumn("Edit", "primary", editCallback, "HelpRequestsTable"),
+    ];
+
+    const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
 
     return <OurTable
         data={helpRequests}
