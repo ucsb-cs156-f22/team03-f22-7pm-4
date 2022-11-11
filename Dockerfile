@@ -4,6 +4,7 @@ WORKDIR /app
 
 ENV NODE_VERSION=14.17.3
 RUN apk add curl
+RUN apk add git
 RUN apk add bash
 RUN apk add maven
 RUN apk add --no-cache libstdc++
