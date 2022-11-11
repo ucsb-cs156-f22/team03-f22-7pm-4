@@ -90,6 +90,10 @@ describe("RecommendationsTable tests", () => {
     expect(getByTestId(`${testId}-cell-row-1-col-done`)).toHaveTextContent(true);
     expect(getByTestId(`${testId}-cell-row-2-col-done`)).toHaveTextContent(true);
 
+    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    expect(deleteButton).toBeInTheDocument();
+    expect(deleteButton).toHaveClass("btn-danger");
+
   });
 
 });
