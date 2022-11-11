@@ -16,6 +16,9 @@ import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
 import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
 import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
 
+import MenuItemIndexPage from "main/pages/MenuItem/MenuItemIndexPage";
+import MenuItemCreatePage from "main/pages/MenuItem/MenuItemCreatePage";
+import MenuItemEditPage from "main/pages/MenuItem/MenuItemEditPage";
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
@@ -55,6 +58,21 @@ function App() {
             <>
               <Route exact path="/diningCommons/create" element={<DiningCommonsCreatePage />} />
               <Route exact path="/diningCommons/edit/:code" element={<DiningCommonsEditPage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/menuitem/list" element={<MenuItemIndexPage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_ADMIN") && (
+            <>
+              <Route exact path="/menuitem/create" element={<MenuItemCreatePage />} />
+              <Route exact path="/menuitem/edit/:id" element={<MenuItemEditPage />} />
             </>
           )
         }
