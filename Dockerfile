@@ -2,8 +2,6 @@ FROM bellsoft/liberica-openjdk-alpine:17.0.2
 
 WORKDIR /app
 
-USER root
-
 ENV NODE_VERSION=14.17.3
 RUN apk add curl
 RUN apk add bash
