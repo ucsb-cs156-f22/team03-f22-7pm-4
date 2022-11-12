@@ -89,6 +89,9 @@ describe("HelpRequestsTable tests", () => {
     expect(getByTestId(`${testId}-cell-row-1-col-requesterEmail`)).toHaveTextContent("bgaucho@ucsb.edu");
     expect(getByTestId(`${testId}-cell-row-1-col-solved`)).toHaveTextContent("false");
 
+    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    expect(deleteButton).toBeInTheDocument();
+    expect(deleteButton).toHaveClass("btn-danger");
 
   });
 
