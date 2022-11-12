@@ -30,7 +30,7 @@ export default function HelpRequestsTable({ helpRequests, _currentUser }) {
         {
             Header: 'Solved?',
             id: 'solved', 
-            accessor: (row, rowIndex) => String(row.solved) 
+            accessor: (row, _rowIndex) => String(row.solved) 
         }
     ];
 
