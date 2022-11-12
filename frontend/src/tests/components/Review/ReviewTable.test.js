@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { _fireEvent, render, _waitFor } from "@testing-library/react";
 import { reviewFixtures } from "fixtures/reviewFixtures";
 import ReviewTable from "main/components/Review/ReviewTable";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -84,6 +84,7 @@ describe("ReviewTable tests", () => {
 
     expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+    expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
 
     // const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     // expect(editButton).toBeInTheDocument();
