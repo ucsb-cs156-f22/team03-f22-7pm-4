@@ -21,7 +21,7 @@ export default function ReviewIndexPage() {
   return (
     <BasicLayout>
       <div className="pt-2">
-        <h1>UCSBDates</h1>
+        <h1>Review</h1>
         <ReviewTable review={review} currentUser={currentUser} />
       </div>
     </BasicLayout>

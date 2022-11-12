@@ -35,29 +35,34 @@ export default function ReviewTable({ review, currentUser }) {
 
     const columns = [
         {
-            Header: 'id',
+            Header: 'Id',
             accessor: 'id', // accessor is the "key" in the data
+            id: 'id', // needed for tests
         },
         {
             Header: 'Item ID',
-            accessor: 'itemId', 
+            accessor: 'itemId',
+            id: 'itemId', 
         },
         {
             Header: 'Date Reviewed',
             accessor: 'dateReviewed',
+            id: 'dateReviewed',
         },
         {
             Header: 'Comment',
             accessor: 'comments',
+            id: 'comments',
         },
         {
             Header: 'Reviewer Email',
             accessor: 'reviewerEmail',
-
+            id: 'reviewerEmail',
         },
         {
             Header: 'Stars',
             accessor: 'stars',
+            id: 'stars',
         }
     ];
 

@@ -1,5 +1,6 @@
 const reviewFixtures = {
     oneReview: {
+        "id": 1,
         "comments": "yummy!",
         "dateReviewed": "2022-09-30T00:02:20",
         "itemId": 13,
@@ -8,6 +9,7 @@ const reviewFixtures = {
     },
     threeReview: [
         {
+            "id": 1,
             "comments": "yumm",
             "dateReviewed": "2022-09-22T00:02:20",
             "itemId": 11,
@@ -15,6 +17,7 @@ const reviewFixtures = {
             "stars": 3
         },
         {
+            "id": 2,
             "comments": "not yummy",
             "dateReviewed": "2022-09-21T00:02:20",
             "itemId": 71,
@@ -22,6 +25,7 @@ const reviewFixtures = {
             "stars": 2
         },
         {
+            "id": 3,
             "comments": "tasty",
             "dateReviewed": "2022-09-12T00:02:20",
             "itemId": 11,
