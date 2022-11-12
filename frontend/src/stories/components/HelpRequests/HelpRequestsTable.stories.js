@@ -6,7 +6,7 @@ import { currentUserFixtures } from 'fixtures/currentUserFixtures';
 
 export default {
     title: 'components/HelpRequests/HelpRequestsTable',
-    component: HelpRequestsTable,
+    component: HelpRequestsTable
 };
 
 const Template = (args) => {

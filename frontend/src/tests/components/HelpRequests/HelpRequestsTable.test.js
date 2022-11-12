@@ -85,12 +85,10 @@ describe("HelpRequestsTable tests", () => {
 
     expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
-    expect(getByTestId(`${testId}-cell-row-0-col-requesterEmail`)).toHaveTextContent("dgaucho@ucsb.edu");
-    expect(getByTestId(`${testId}-cell-row-1-col-requesterEmail`)).toHaveTextContent("egaucho@ucsb.edu");
+    expect(getByTestId(`${testId}-cell-row-0-col-requesterEmail`)).toHaveTextContent("agaucho@ucsb.edu");
+    expect(getByTestId(`${testId}-cell-row-1-col-requesterEmail`)).toHaveTextContent("bgaucho@ucsb.edu");
+    expect(getByTestId(`${testId}-cell-row-1-col-solved`)).toHaveTextContent("false");
 
-    const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
-    expect(editButton).toBeInTheDocument();
-    expect(editButton).toHaveClass("btn-primary");
 
   });
 
