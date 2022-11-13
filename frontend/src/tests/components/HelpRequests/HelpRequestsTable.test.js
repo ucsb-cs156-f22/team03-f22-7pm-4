@@ -1,9 +1,11 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { helpRequestsFixtures } from "fixtures/helpRequestsFixtures";
 import HelpRequestsTable from "main/components/HelpRequests/HelpRequestsTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
+import axios from "axios";
+import AxiosMockAdapter from "axios-mock-adapter";
 
 
 const mockedNavigate = jest.fn();
@@ -13,9 +15,20 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
+const mockToast = jest.fn();
+
+jest.mock('react-toastify', () => {
+    const originalModule = jest.requireActual('react-toastify');
+    return {
+        __esModule: true,
+        ...originalModule,
+        toast: (x) => mockToast(x)
+    };
+});
+
 describe("HelpRequestsTable tests", () => {
   const queryClient = new QueryClient();
-
+  const axiosMock = new AxiosMockAdapter(axios);
 
   test("renders without crashing for empty table with user not logged in", () => {
     const currentUser = null;
@@ -89,7 +102,36 @@ describe("HelpRequestsTable tests", () => {
     expect(getByTestId(`${testId}-cell-row-1-col-requesterEmail`)).toHaveTextContent("bgaucho@ucsb.edu");
     expect(getByTestId(`${testId}-cell-row-1-col-solved`)).toHaveTextContent("false");
 
+    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    expect(deleteButton).toBeInTheDocument();
+    expect(deleteButton).toHaveClass("btn-danger");
 
+  });
+
+  test("Delete button properly calls callback", async () => {
+
+    const currentUser = currentUserFixtures.adminUser;
+
+    axiosMock.onGet("/api/helprequest/all").reply(200, helpRequestsFixtures.threeRequests);
+    axiosMock.onDelete("/api/helprequest").reply(200, "HelpRequest with id 1 was deleted");
+
+    const { getByTestId } = render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <HelpRequestsTable helpRequests={helpRequestsFixtures.threeRequests} currentUser={currentUser} />
+        </MemoryRouter>
+      </QueryClientProvider>
+
+    );
+
+    await waitFor(() => { expect(getByTestId(`HelpRequestsTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
+
+    const deleteButton = getByTestId(`HelpRequestsTable-cell-row-0-col-Delete-button`);
+    expect(deleteButton).toBeInTheDocument();
+
+    fireEvent.click(deleteButton);
+
+    await waitFor(() => { expect(mockToast).toBeCalledWith("HelpRequest with id 1 was deleted") });
   });
 
 });
