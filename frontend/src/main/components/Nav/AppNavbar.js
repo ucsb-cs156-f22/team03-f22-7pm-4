@@ -84,7 +84,6 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                 )
               }
             </Nav>
-
             <Nav className="ml-auto">
               {/* This `nav` component contains all navigation items that show up on the right side */}
               {

@@ -260,7 +260,6 @@ describe("AppNavbar tests", () => {
         await waitFor( () => expect(getByTestId(/appnavbar-help-requests-create/)).toBeInTheDocument() );
 
     });
-
    
 });
 
