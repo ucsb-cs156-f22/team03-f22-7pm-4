@@ -14,7 +14,7 @@ export default function HelpRequestsIndexPage() {
       ["/api/HelpRequest/all"],
             // Stryker disable next-line StringLiteral,ObjectLiteral : since "GET" is default, "" is an equivalent mutation
             { method: "GET", url: "/api/HelpRequest/all" },
-    
+      []
     );
 
   return (
