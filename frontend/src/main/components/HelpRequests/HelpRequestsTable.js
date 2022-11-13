@@ -2,8 +2,17 @@ import OurTable, { ButtonColumn } from "main/components/OurTable";
 import { useBackendMutation } from "main/utils/useBackend";
 import { onDeleteSuccess } from "main/utils/UCSBDateUtils"
 import { hasRole } from "main/utils/currentUser";
-import { cellToAxiosParamsDelete } from "main/utils/HelpRequestsUtils";
 
+
+export function cellToAxiosParamsDelete(cell) {
+    return {
+        url: "/api/HelpRequest",
+        method: "DELETE",
+        params: {
+            id: cell.row.values.id
+        }
+    }
+}
 
 export default function HelpRequestsTable({ helpRequests, currentUser }) {
 

@@ -112,8 +112,8 @@ describe("HelpRequestsTable tests", () => {
 
     const currentUser = currentUserFixtures.adminUser;
 
-    axiosMock.onGet("/api/helprequest/all").reply(200, helpRequestsFixtures.threeRequests);
-    axiosMock.onDelete("/api/helprequest").reply(200, "HelpRequest with id 1 was deleted");
+    axiosMock.onGet("/api/HelpRequest/all").reply(200, helpRequestsFixtures.threeRequests);
+    axiosMock.onDelete("/api/HelpRequest").reply(200, "HelpRequest with id 1 was deleted");
 
     const { getByTestId } = render(
       <QueryClientProvider client={queryClient}>
