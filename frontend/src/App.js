@@ -62,6 +62,14 @@ function App() {
           )
         }
         {
+          hasRole(currentUser, "ROLE_ADMIN") && (
+            <>
+              <Route exact path="/menuitem/create" element={<MenuItemCreatePage />} />
+              <Route exact path="/menuitem/edit/:id" element={<MenuItemEditPage />} />
+            </>
+          )
+        }
+        {
           hasRole(currentUser, "ROLE_USER") && (
             <>
               <Route exact path="/ucsbdates/list" element={<UCSBDatesIndexPage />} />
