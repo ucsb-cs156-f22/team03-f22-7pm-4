@@ -29,4 +29,3 @@ Show.args = {
     buttonLabel: "Update",
     submitAction: (data) => { console.log('Update was clicked, parameter to submitAction=',data); }
 };
-Footer
