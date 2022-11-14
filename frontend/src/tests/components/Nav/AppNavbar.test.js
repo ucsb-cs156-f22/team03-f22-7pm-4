@@ -237,7 +237,7 @@ describe("AppNavbar tests", () => {
 
     });
 
-    test("renders the helprequests menu correctly for an admin", async () => {
+    test("renders the HelpRequests menu correctly for an admin", async () => {
 
         const currentUser = currentUserFixtures.adminUser;
         const systemInfo = systemInfoFixtures.showingBoth;
