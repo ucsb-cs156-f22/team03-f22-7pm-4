@@ -7,7 +7,7 @@ export default function ArticlesIndexPage() {
                 <h1>Articles</h1>
                 <p>
                     This is where the index page will go
-        </p>
+                </p>
             </div>
         </BasicLayout>
     )
