@@ -1,4 +1,4 @@
-import { render, waitFor} from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -31,7 +31,7 @@ describe("AppNavbar tests", () => {
         const currentUser = currentUserFixtures.adminUser;
         const doLogin = jest.fn();
 
-        const { getByText , getByTestId } = render(
+        const { getByText, getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} doLogin={doLogin} />
@@ -41,7 +41,7 @@ describe("AppNavbar tests", () => {
 
         await waitFor(() => expect(getByText("Welcome, phtcon@ucsb.edu")).toBeInTheDocument());
         const adminMenu = getByTestId("appnavbar-admin-dropdown");
-        expect(adminMenu).toBeInTheDocument();        
+        expect(adminMenu).toBeInTheDocument();
     });
 
     test("renders H2Console and Swagger links correctly", async () => {
@@ -51,7 +51,7 @@ describe("AppNavbar tests", () => {
 
         const doLogin = jest.fn();
 
-        const { getByText  } = render(
+        const { getByText } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
@@ -61,7 +61,7 @@ describe("AppNavbar tests", () => {
 
         await waitFor(() => expect(getByText("H2Console")).toBeInTheDocument());
         const swaggerMenu = getByText("Swagger");
-        expect(swaggerMenu).toBeInTheDocument();        
+        expect(swaggerMenu).toBeInTheDocument();
     });
 
 
@@ -72,7 +72,7 @@ describe("AppNavbar tests", () => {
 
         const doLogin = jest.fn();
 
-        const {getByTestId } = render(
+        const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
@@ -92,7 +92,7 @@ describe("AppNavbar tests", () => {
         delete window.location
         window.location = new URL('http://localhost:3000')
 
-        const {getByTestId } = render(
+        const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
@@ -112,7 +112,7 @@ describe("AppNavbar tests", () => {
         delete window.location
         window.location = new URL('http://127.0.0.1:3000')
 
-        const {getByTestId } = render(
+        const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
@@ -132,7 +132,7 @@ describe("AppNavbar tests", () => {
         delete window.location
         window.location = new URL('http://127.0.0.1:3000')
 
-        const {getByTestId } = render(
+        const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
@@ -153,7 +153,7 @@ describe("AppNavbar tests", () => {
         delete window.location
         window.location = new URL('http://localhost:8080')
 
-        const {getByTestId, queryByTestId } = render(
+        const { getByTestId, queryByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
@@ -172,7 +172,7 @@ describe("AppNavbar tests", () => {
 
         const doLogin = jest.fn();
 
-        const {getByTestId  } = render(
+        const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
@@ -185,7 +185,7 @@ describe("AppNavbar tests", () => {
         const aElement = dropdown.querySelector("a");
         expect(aElement).toBeInTheDocument();
         aElement?.click();
-        await waitFor( () => expect(getByTestId("appnavbar-ucsbdates-list")).toBeInTheDocument() );
+        await waitFor(() => expect(getByTestId("appnavbar-ucsbdates-list")).toBeInTheDocument());
 
     });
 
@@ -196,7 +196,7 @@ describe("AppNavbar tests", () => {
 
         const doLogin = jest.fn();
 
-        const {getByTestId  } = render(
+        const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
@@ -209,7 +209,7 @@ describe("AppNavbar tests", () => {
         const aElement = dropdown.querySelector("a");
         expect(aElement).toBeInTheDocument();
         aElement?.click();
-        await waitFor( () => expect(getByTestId(/appnavbar-ucsbdates-create/)).toBeInTheDocument() );
+        await waitFor(() => expect(getByTestId(/appnavbar-ucsbdates-create/)).toBeInTheDocument());
 
     });
 
@@ -220,7 +220,7 @@ describe("AppNavbar tests", () => {
 
         const doLogin = jest.fn();
 
-        const {getByTestId  } = render(
+        const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
@@ -233,7 +233,7 @@ describe("AppNavbar tests", () => {
         const aElement = dropdown.querySelector("a");
         expect(aElement).toBeInTheDocument();
         aElement?.click();
-        await waitFor( () => expect(getByTestId(/appnavbar-dining-commons-list/)).toBeInTheDocument() );
+        await waitFor(() => expect(getByTestId(/appnavbar-dining-commons-list/)).toBeInTheDocument());
 
     });
 
@@ -244,7 +244,7 @@ describe("AppNavbar tests", () => {
 
         const doLogin = jest.fn();
 
-        const {getByTestId  } = render(
+        const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
@@ -257,10 +257,10 @@ describe("AppNavbar tests", () => {
         const aElement = dropdown.querySelector("a");
         expect(aElement).toBeInTheDocument();
         aElement?.click();
-        await waitFor( () => expect(getByTestId(/appnavbar-help-requests-create/)).toBeInTheDocument() );
+        await waitFor(() => expect(getByTestId(/appnavbar-help-requests-create/)).toBeInTheDocument());
 
     });
-   
+
     test("renders the recommendations menu correctly for a user", async () => {
 
         const currentUser = currentUserFixtures.userOnly;
@@ -268,7 +268,7 @@ describe("AppNavbar tests", () => {
 
         const doLogin = jest.fn();
 
-        const {getByTestId  } = render(
+        const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
@@ -281,7 +281,7 @@ describe("AppNavbar tests", () => {
         const aElement = dropdown.querySelector("a");
         expect(aElement).toBeInTheDocument();
         aElement?.click();
-        await waitFor( () => expect(getByTestId("appnavbar-recommendations-list")).toBeInTheDocument() );
+        await waitFor(() => expect(getByTestId("appnavbar-recommendations-list")).toBeInTheDocument());
 
     });
 
@@ -292,7 +292,7 @@ describe("AppNavbar tests", () => {
 
         const doLogin = jest.fn();
 
-        const {getByTestId  } = render(
+        const { getByTestId } = render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
                     <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
@@ -305,7 +305,7 @@ describe("AppNavbar tests", () => {
         const aElement = dropdown.querySelector("a");
         expect(aElement).toBeInTheDocument();
         aElement?.click();
-        await waitFor( () => expect(getByTestId(/appnavbar-recommendations-create/)).toBeInTheDocument() );
+        await waitFor(() => expect(getByTestId(/appnavbar-recommendations-create/)).toBeInTheDocument());
 
     });
 });
