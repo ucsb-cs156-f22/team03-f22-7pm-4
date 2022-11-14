@@ -33,14 +33,6 @@ export default function UCSBOrganizationsTable({ organizations, currentUser }) {
     // Stryker disable next-line all : TODO try to make a good test for this
     const deleteCallback = async (cell) => { deleteMutation.mutate(cell); }
 
-
-    // {
-    //     "orgCode": "ZPR",
-    //     "orgTranslationShort": "ZETA PHI RHO",
-    //     "orgTranslation": "ZETA PHI RHO",
-    //     "inactive": false
-    // }
-
     const columns = [
         {
             Header: 'Organization Code/Acronym',
@@ -57,13 +49,14 @@ export default function UCSBOrganizationsTable({ organizations, currentUser }) {
         {
             Header: 'Inactive?',
             accessor: 'inactive',
+            accessor: (row, _rowIndex) => String(row.inactive)
         }
     ];
 
     const columnsIfAdmin = [
         ...columns,
         // ButtonColumn("Edit", "primary", editCallback, "UCSBDatesTable"),
-        ButtonColumn("Delete", "danger", deleteCallback, "UCSBDatesTable", "orgCode")
+        ButtonColumn("Delete", "danger", deleteCallback, "UCSBOrganizationsTable", "orgCode")
     ];
 
     const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
