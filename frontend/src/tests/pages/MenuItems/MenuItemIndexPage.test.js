@@ -22,6 +22,13 @@ jest.mock('react-toastify', () => {
     };
 });
 
+const mockedNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useNavigate: () => mockedNavigate
+}));
+
 describe("MenuItemIndexPage tests", () => {
 
     const axiosMock =new AxiosMockAdapter(axios);
@@ -164,4 +171,31 @@ describe("MenuItemIndexPage tests", () => {
 
     });
 
+    test("test what happens when you click edit as an admin", async () => {
+        setupAdminUser();
+
+        const queryClient = new QueryClient();
+        axiosMock.onGet("/api/UCSBDiningCommonsMenuItem/all").reply(200, menuItemFixtures.threeMenuItems);
+
+        const { getByTestId } = render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <MenuItemIndexPage />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await waitFor(() => { expect(getByTestId(`${testId}-cell-row-0-col-id`)).toBeInTheDocument(); });
+
+        expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1"); 
+
+
+        const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
+        expect(editButton).toBeInTheDocument();
+       
+        fireEvent.click(editButton);
+
+        await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/menuitem/edit/1'));
+
+    });
 });

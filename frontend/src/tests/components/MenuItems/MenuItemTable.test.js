@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { menuItemFixtures } from "fixtures/menuItemFixtures";
 import MenuItemTable from "main/components/MenuItem/MenuItemTable";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -84,33 +84,35 @@ describe("MenuItemTable tests", () => {
 
     expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
-    /*
+    
     const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
     expect(editButton).toHaveClass("btn-primary");
-    */
+    
     const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
 
   });
-  /*
+  
   test("Edit button navigates to the edit page for admin user", async () => {
     const currentUser = currentUserFixtures.adminUser;
     const { getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <MenuItemTable items={menuItemFixtures.threeDates} currentUser={currentUser} />
+          <MenuItemTable menuItem={menuItemFixtures.threeMenuItems} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
-    await waitFor(() => { expect(getByTestId(`MenuItemTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
+    
+    await waitFor(() => {expect(getByTestId(`MenuItemTable-cell-row-0-col-id`)).toHaveTextContent("1");});
     const editButton = getByTestId(`MenuItemTable-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
-    
+
     fireEvent.click(editButton);
     await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/menuitem/edit/1'));
+    
   });
-  */
+  
   
 });
