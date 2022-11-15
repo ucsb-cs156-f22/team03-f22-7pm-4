@@ -55,7 +55,7 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                   </NavDropdown>
                 )
               }
-              {
+               {
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="Dining Commons" id="appnavbar-dining-commons-dropdown" data-testid="appnavbar-dining-commons-dropdown" >
                     <NavDropdown.Item as={Link} to="/diningCommons/list" data-testid="appnavbar-dining-commons-list">List</NavDropdown.Item>
@@ -77,6 +77,26 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
               }
               {
                 hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="Menu Item" id="appnavbar-menu-item-dropdown" data-testid="appnavbar-menu-item-dropdown" >
+                  <NavDropdown.Item as={Link} to="/menuitem/list" data-testid="appnavbar-menu-item-list">List</NavDropdown.Item>
+                  {
+                    hasRole(currentUser, "ROLE_ADMIN") && (
+                      <NavDropdown.Item as={Link} to="/menuitem/create" data-testid="appnavbar-menu-item-create">Create</NavDropdown.Item>
+                    )
+                  }
+                </NavDropdown>
+                )
+              }
+              {
+                hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="HelpRequests" id="appnavbar-help-requests-dropdown" data-testid="appnavbar-help-requests-dropdown" >
+                    <NavDropdown.Item as={Link} to="/helpRequests/list" data-testid="appnavbar-help-requests-list">List</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/helpRequests/create" data-testid="appnavbar-help-requests-create">Create</NavDropdown.Item>
+                  </NavDropdown>
+                )
+              }
+              {
+                hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="Article" id="appnavbar-articles-dropdown" data-testid="appnavbar-articles-dropdown" >
                     <NavDropdown.Item as={Link} to="/articles/list" data-testid="appnavbar-articles-list">List</NavDropdown.Item>
                     {
@@ -88,7 +108,6 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                 )
               }
             </Nav>
-
             <Nav className="ml-auto">
               {/* This `nav` component contains all navigation items that show up on the right side */}
               {
@@ -98,8 +117,8 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                     <Button onClick={doLogout}>Log Out</Button>
                   </>
                 ) : (
-                    <Button href="/oauth2/authorization/google">Log In</Button>
-                  )
+                  <Button href="/oauth2/authorization/google">Log In</Button>
+                )
               }
             </Nav>
           </Navbar.Collapse>
