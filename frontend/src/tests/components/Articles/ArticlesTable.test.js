@@ -71,22 +71,26 @@ describe("ArticlesTable tests", () => {
 
     const expectedHeaders = ['id',  'Title', 'Url','Explanation','Email','Date Added'];
     const expectedFields = ['id', 'title','url', 'explanation','email','dateAdded'];
-    const testId = "articlesTable";
+    const testId = "ArticlesTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = getByText(headerText);
       expect(header).toBeInTheDocument();
     });
 
+    
     expectedFields.forEach((field) => {
-      const header = getByTestId(`${testId}-cell-row-0-col-${field}`);
-      expect(header).toBeInTheDocument();
+        const header = getByTestId(`${testId}-cell-row-0-col-${field}`);
+        expect(header).toBeInTheDocument();
     });
+    
 
-    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
-    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+    // expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
+    // expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+    
     expect(getByTestId(`${testId}-cell-row-0-col-title`)).toHaveTextContent("title1");
     expect(getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent("title2");
+    expect(getByTestId(`${testId}-cell-row-2-col-title`)).toHaveTextContent("title3");
 
     // const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     // expect(editButton).toBeInTheDocument();
