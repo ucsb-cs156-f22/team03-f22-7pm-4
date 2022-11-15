@@ -11,6 +11,9 @@ import DiningCommonsIndexPage from "main/pages/DiningCommons/DiningCommonsIndexP
 import DiningCommonsCreatePage from "main/pages/DiningCommons/DiningCommonsCreatePage";
 import DiningCommonsEditPage from "main/pages/DiningCommons/DiningCommonsEditPage";
 
+import MenuItemIndexPage from "main/pages/MenuItem/MenuItemIndexPage";
+import MenuItemCreatePage from "main/pages/MenuItem/MenuItemCreatePage";
+import MenuItemEditPage from "main/pages/MenuItem/MenuItemEditPage";
 
 import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
 import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
@@ -79,7 +82,22 @@ function App() {
         {
           hasRole(currentUser, "ROLE_USER") && (
             <>
-              <Route exact path="/helprequests/list" element={<HelpRequestsIndexPage />} />
+              <Route exact path="/HelpRequests/list" element={<HelpRequestsIndexPage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/menuitem/list" element={<MenuItemIndexPage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_ADMIN") && (
+            <>
+              <Route exact path="/menuitem/create" element={<MenuItemCreatePage />} />
+              <Route exact path="/menuitem/edit/:id" element={<MenuItemEditPage />} />
             </>
           )
         }
