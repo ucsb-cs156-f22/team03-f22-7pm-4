@@ -99,14 +99,11 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
               }
               {
                 hasRole(currentUser, "ROLE_USER") && (
-                <NavDropdown title="Review" id="appnavbar-review-dropdown" data-testid="appnavbar-review-dropdown" >
+                  <NavDropdown title="Review" id="appnavbar-review-dropdown" data-testid="appnavbar-review-dropdown" >
                     <NavDropdown.Item as={Link} to="/review/list" data-testid="appnavbar-review-list">List</NavDropdown.Item>
-                    {
-                      hasRole(currentUser, "ROLE_ADMIN") && (
-                        <NavDropdown.Item as={Link} to="/review/create" data-testid="appnavbar-review-create">Create</NavDropdown.Item>
-                      )
-                    }
-               }
+                  </NavDropdown>
+                )
+              }
             </Nav>
             <Nav className="ml-auto">
               {/* This `nav` component contains all navigation items that show up on the right side */}
