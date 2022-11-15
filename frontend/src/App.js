@@ -13,7 +13,6 @@ import DiningCommonsEditPage from "main/pages/DiningCommons/DiningCommonsEditPag
 
 import OrganizationsIndexPage from "main/pages/Organizations/OrganizationsIndexPage";
 
-
 import UCSBDatesIndexPage from "main/pages/UCSBDates/UCSBDatesIndexPage";
 import UCSBDatesCreatePage from "main/pages/UCSBDates/UCSBDatesCreatePage";
 import UCSBDatesEditPage from "main/pages/UCSBDates/UCSBDatesEditPage";
@@ -49,8 +48,7 @@ function App() {
         {
           hasRole(currentUser, "ROLE_USER") && (
             <>
-              <Route exact path="ucsborganization/list" element={<OrganizationsIndexPage />} />
-      
+              <Route exact path="/ucsborganization/list" element={<OrganizationsIndexPage />} />
             </>
           )
         }
