@@ -1,6 +1,6 @@
-import {  render } from "@testing-library/react";
-import { diningCommonsFixtures } from "fixtures/diningCommonsFixtures";
-import DiningCommonsTable from "main/components/DiningCommons/DiningCommonsTable";
+import { _fireEvent, render, _waitFor } from "@testing-library/react";
+import { reviewFixtures } from "fixtures/reviewFixtures";
+import ReviewTable from "main/components/Review/ReviewTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
-describe("DiningCommonsTable tests", () => {
+describe("ReviewTable tests", () => {
   const queryClient = new QueryClient();
 
 
@@ -23,7 +23,7 @@ describe("DiningCommonsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <DiningCommonsTable diningCommons={[]} currentUser={currentUser} />
+          <ReviewTable review={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -35,7 +35,7 @@ describe("DiningCommonsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <DiningCommonsTable diningCommons={[]} currentUser={currentUser} />
+          <ReviewTable review={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -48,30 +48,29 @@ describe("DiningCommonsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <DiningCommonsTable diningCommons={[]} currentUser={currentUser} />
+          <ReviewTable review={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
   });
 
-  test("Has the expected column headers and content for adminUser", () => {
+  test("Has the expected colum headers and content for adminUser", () => {
 
     const currentUser = currentUserFixtures.adminUser;
 
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <DiningCommonsTable diningCommons={diningCommonsFixtures.threeCommons} currentUser={currentUser} />
+          <ReviewTable review={reviewFixtures.threeReview} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-
-    const expectedHeaders = ['Code', 'Name', 'Sack Meal?','Takeout Meal?','Dining Cam?','Latitude','Longitude'];
-    const expectedFields = ['code', 'name','hasSackMeal', 'hasTakeOutMeal','hasDiningCam','latitude','longitude'];
-    const testId = "DiningCommonsTable";
+    const expectedHeaders = ["Id", "Item ID", "Date Reviewed", "Comment", "Reviewer Email", "Stars"];
+    const expectedFields = ["id", "itemId", "dateReviewed", "comments", "reviewerEmail", "stars"];
+    const testId = "ReviewTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = getByText(headerText);
@@ -83,10 +82,9 @@ describe("DiningCommonsTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(getByTestId(`${testId}-cell-row-0-col-code`)).toHaveTextContent("de-la-guerra");
-    expect(getByTestId(`${testId}-cell-row-1-col-code`)).toHaveTextContent("ortega");
-    expect(getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent("De La Guerra");
-    expect(getByTestId(`${testId}-cell-row-1-col-name`)).toHaveTextContent("Ortega");
+    expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
+    expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+    expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
 
     // const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     // expect(editButton).toBeInTheDocument();
@@ -105,15 +103,15 @@ describe("DiningCommonsTable tests", () => {
   //   const { getByTestId } = render(
   //     <QueryClientProvider client={queryClient}>
   //       <MemoryRouter>
-  //         <UCSBDatesTable diningCommons={ucsbDatesFixtures.threeDates} currentUser={currentUser} />
+  //         <ReviewTable review={reviewFixtures.threeDates} currentUser={currentUser} />
   //       </MemoryRouter>
   //     </QueryClientProvider>
 
   //   );
 
-  //   await waitFor(() => { expect(getByTestId(`UCSBDatesTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
+  //   await waitFor(() => { expect(getByTestId(`ReviewTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
 
-  //   const editButton = getByTestId(`UCSBDatesTable-cell-row-0-col-Edit-button`);
+  //   const editButton = getByTestId(`ReviewTable-cell-row-0-col-Edit-button`);
   //   expect(editButton).toBeInTheDocument();
     
   //   fireEvent.click(editButton);
@@ -121,7 +119,6 @@ describe("DiningCommonsTable tests", () => {
   //   await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/ucsbdates/edit/1'));
 
   // });
-
 
 });
 
