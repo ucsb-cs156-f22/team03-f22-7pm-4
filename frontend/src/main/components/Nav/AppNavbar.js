@@ -87,8 +87,15 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                   </NavDropdown>
                 )
               }
+              {
+                hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="HelpRequests" id="appnavbar-help-requests-dropdown" data-testid="appnavbar-help-requests-dropdown" >
+                    <NavDropdown.Item as={Link} to="/helpRequests/list" data-testid="appnavbar-help-requests-list">List</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/helpRequests/create" data-testid="appnavbar-help-requests-create">Create</NavDropdown.Item>
+                  </NavDropdown>
+                )
+              }
             </Nav>
-
             <Nav className="ml-auto">
               {/* This `nav` component contains all navigation items that show up on the right side */}
               {
