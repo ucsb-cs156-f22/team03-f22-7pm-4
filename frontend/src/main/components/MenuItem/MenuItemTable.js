@@ -1,7 +1,7 @@
 import OurTable, { ButtonColumn} from "main/components/OurTable";
 import { useBackendMutation } from "main/utils/useBackend";
 import { onDeleteSuccess } from "main/utils/UCSBDateUtils"
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
 export function cellToAxiosParamsDelete(cell) {
@@ -15,13 +15,13 @@ export function cellToAxiosParamsDelete(cell) {
 }
 
 export default function MenuItemTable({ menuItem, currentUser }) {
-    /*
+    
     const navigate = useNavigate();
     
     const editCallback = (cell) => {
         navigate(`/menuitem/edit/${cell.row.values.id}`)
     }
-    */
+    
     // Stryker disable all : hard to test for query caching
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
@@ -56,7 +56,7 @@ export default function MenuItemTable({ menuItem, currentUser }) {
     
     const columnsIfAdmin = [
         ...columns,
-        //ButtonColumn("Edit", "primary", editCallback, testid),
+        ButtonColumn("Edit", "primary", editCallback, testid),
         ButtonColumn("Delete", "danger", deleteCallback, testid)
     ];
 
