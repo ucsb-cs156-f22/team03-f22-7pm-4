@@ -21,7 +21,7 @@ describe("UCSBOrganizationTable tests", () => {
         render(
           <QueryClientProvider client={queryClient}>
             <MemoryRouter>
-              <UCSBOrganizationTable ucsborganization={[]} currentUser={currentUser} />
+              <UCSBOrganizationsTable ucsborganization={[]} currentUser={currentUser} />
             </MemoryRouter>
           </QueryClientProvider>
     
@@ -34,7 +34,7 @@ describe("UCSBOrganizationTable tests", () => {
         render(
           <QueryClientProvider client={queryClient}>
             <MemoryRouter>
-              <UCSBOrganizationTable ucsbOrganizations={[]} currentUser={currentUser} />
+              <UCSBOrganizationsTable ucsbOrganizations={[]} currentUser={currentUser} />
             </MemoryRouter>
           </QueryClientProvider>
       
@@ -48,7 +48,7 @@ describe("UCSBOrganizationTable tests", () => {
         render(
           <QueryClientProvider client={queryClient}>
             <MemoryRouter>
-              <UCSBOrganizationTable ucsbOrganizations={[]} currentUser={currentUser} />
+              <UCSBOrganizationsTable ucsbOrganizations={[]} currentUser={currentUser} />
             </MemoryRouter>
           </QueryClientProvider>
       
@@ -63,7 +63,7 @@ describe("UCSBOrganizationTable tests", () => {
         const { getByText, getByTestId } = render(
           <QueryClientProvider client={queryClient}>
             <MemoryRouter>
-              <UCSBOrganizationTable ucsborganization={ucsbOrganizationFixtures.threeOrganizations} currentUser={currentUser} />
+              <UCSBOrganizationsTable ucsborganization={ucsbOrganizationFixtures.threeOrganizations} currentUser={currentUser} />
             </MemoryRouter>
           </QueryClientProvider>
     
@@ -71,7 +71,7 @@ describe("UCSBOrganizationTable tests", () => {
 
     const expectedHeaders = ['Organization Code/Acronym', 'Short Organization Translation', 'Full Organization Translation', 'Inactive?'];
     const expectedFields = ['orgCode', 'orgTranslationShort','orgTranslation', 'inactive'];
-    const testId = "UCSBOrganizationTable";
+    const testId = "UCSBOrganizationsTable";
 
     expectedHeaders.forEach((headerText) => {
         const header = getByText(headerText);
