@@ -53,17 +53,18 @@ export default function UCSBOrganizationsTable({ organizations, currentUser }) {
         }
     ];
 
+    const testID = "UCSBOrganizationsTable";
+
     const columnsIfAdmin = [
         ...columns,
-        // ButtonColumn("Edit", "primary", editCallback, "UCSBDatesTable"),
-        ButtonColumn("Delete", "danger", deleteCallback, "UCSBOrganizationsTable")
+        ButtonColumn("Delete", "danger", deleteCallback, testID)
     ];
 
-    const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
+    const cols = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
 
     return <OurTable
         data={organizations}
-        columns={columnsToDisplay}
-        testid={"UCSBOrganizationsTable"}
+        columns={cols}
+        testid={testID}
     />;
 };

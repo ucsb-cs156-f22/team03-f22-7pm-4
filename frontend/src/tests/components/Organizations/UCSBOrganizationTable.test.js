@@ -21,7 +21,7 @@ describe("UCSBOrganizationTable tests", () => {
         render(
           <QueryClientProvider client={queryClient}>
             <MemoryRouter>
-              <UCSBOrganizationsTable ucsborganization={[]} currentUser={currentUser} />
+              <UCSBOrganizationsTable organizations={[]} currentUser={currentUser} />
             </MemoryRouter>
           </QueryClientProvider>
     
@@ -34,7 +34,7 @@ describe("UCSBOrganizationTable tests", () => {
         render(
           <QueryClientProvider client={queryClient}>
             <MemoryRouter>
-              <UCSBOrganizationsTable ucsbOrganizations={[]} currentUser={currentUser} />
+              <UCSBOrganizationsTable organizations={[]} currentUser={currentUser} />
             </MemoryRouter>
           </QueryClientProvider>
       
@@ -48,7 +48,7 @@ describe("UCSBOrganizationTable tests", () => {
         render(
           <QueryClientProvider client={queryClient}>
             <MemoryRouter>
-              <UCSBOrganizationsTable ucsbOrganizations={[]} currentUser={currentUser} />
+              <UCSBOrganizationsTable organizations={[]} currentUser={currentUser} />
             </MemoryRouter>
           </QueryClientProvider>
       
@@ -63,7 +63,7 @@ describe("UCSBOrganizationTable tests", () => {
         const { getByText, getByTestId } = render(
           <QueryClientProvider client={queryClient}>
             <MemoryRouter>
-              <UCSBOrganizationsTable ucsborganization={ucsbOrganizationFixtures.threeOrganizations} currentUser={currentUser} />
+              <UCSBOrganizationsTable organizations={ucsbOrganizationFixtures.threeOrganizations} currentUser={currentUser} />
             </MemoryRouter>
           </QueryClientProvider>
     
@@ -85,8 +85,8 @@ describe("UCSBOrganizationTable tests", () => {
 
    expect(getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("test2");
    expect(getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("test3");
-   expect(getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("org1Short");
-   expect(getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`)).toHaveTextContent("org2Short");
+   expect(getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("org2Short");
+   expect(getByTestId(`${testId}-cell-row-1-col-orgTranslationShort`)).toHaveTextContent("org3Short");
    
    const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
    expect(deleteButton).toBeInTheDocument();
