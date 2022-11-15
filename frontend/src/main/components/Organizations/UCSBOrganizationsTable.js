@@ -48,7 +48,7 @@ export default function UCSBOrganizationsTable({ organizations, currentUser }) {
         },
         {
             Header: 'Inactive?',
-            accessor: 'inactive',
+            id: 'inactive',
             accessor: (row, _rowIndex) => String(row.inactive)
         }
     ];
@@ -56,7 +56,7 @@ export default function UCSBOrganizationsTable({ organizations, currentUser }) {
     const columnsIfAdmin = [
         ...columns,
         // ButtonColumn("Edit", "primary", editCallback, "UCSBDatesTable"),
-        ButtonColumn("Delete", "danger", deleteCallback, "UCSBOrganizationsTable", "orgCode")
+        ButtonColumn("Delete", "danger", deleteCallback, "UCSBOrganizationsTable")
     ];
 
     const columnsToDisplay = hasRole(currentUser, "ROLE_ADMIN") ? columnsIfAdmin : columns;
