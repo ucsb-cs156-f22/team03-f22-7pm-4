@@ -84,10 +84,6 @@ describe("ArticlesTable tests", () => {
         expect(header).toBeInTheDocument();
     });
     
-
-    // expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
-    // expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
-    
     expect(getByTestId(`${testId}-cell-row-0-col-title`)).toHaveTextContent("title1");
     expect(getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent("title2");
     expect(getByTestId(`${testId}-cell-row-2-col-title`)).toHaveTextContent("title3");
@@ -96,39 +92,9 @@ describe("ArticlesTable tests", () => {
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
     expect(getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent("3");
 
-    // const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
-    // expect(editButton).toBeInTheDocument();
-    // expect(editButton).toHaveClass("btn-primary");
-
     const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
   });
-
-  // test("Edit button navigates to the edit page for admin user", async () => {
-
-  //   const currentUser = currentUserFixtures.adminUser;
-
-  //   const { getByTestId } = render(
-  //     <QueryClientProvider client={queryClient}>
-  //       <MemoryRouter>
-  //         <UCSBDatesTable diningCommons={ucsbDatesFixtures.threeDates} currentUser={currentUser} />
-  //       </MemoryRouter>
-  //     </QueryClientProvider>
-
-  //   );
-
-  //   await waitFor(() => { expect(getByTestId(`UCSBDatesTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
-
-  //   const editButton = getByTestId(`UCSBDatesTable-cell-row-0-col-Edit-button`);
-  //   expect(editButton).toBeInTheDocument();
-    
-  //   fireEvent.click(editButton);
-
-  //   await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/ucsbdates/edit/1'));
-
-  // });
-
-
 });
 
