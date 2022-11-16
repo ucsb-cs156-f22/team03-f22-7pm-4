@@ -69,19 +69,19 @@ describe("UCSBOrganizationTable tests", () => {
     
     );
 
-    const expectedHeaders = ['Organization Code/Acronym', 'Short Organization Translation', 'Full Organization Translation', 'Inactive?'];
-    const expectedFields = ['orgCode', 'orgTranslationShort','orgTranslation', 'inactive'];
+    const expectedHeaders = ['Organization Code/Acronym', 'Short Organization Translation', 'Full Organization Translation', 'Inactive?']
+    const expectedFields = ['orgCode', 'orgTranslationShort','orgTranslation', 'inactive']
     const testId = "UCSBOrganizationsTable";
 
-    // expectedHeaders.forEach((headerText) => {
-    //   const header = getByText(headerText);
-    //   expect(header).toBeInTheDocument();
-    // });
+    expectedHeaders.forEach((headerText) => {
+      const header = getByText(headerText);
+      expect(header).toBeInTheDocument();
+    });
 
-    // expectedFields.forEach((field) => {
-    //   const header = getByTestId(`${testId}-cell-row-0-col-${field}`);
-    //   expect(header).toBeInTheDocument();
-    // });
+    expectedFields.forEach((field) => {
+      const header = getByTestId(`${testId}-cell-row-0-col-${field}`);
+      expect(header).toBeInTheDocument();
+    });
 
    expect(getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("test2");
    expect(getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("test3");
