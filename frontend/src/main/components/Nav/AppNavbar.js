@@ -77,7 +77,7 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
               }
               {
                 hasRole(currentUser, "ROLE_USER") && (
-                  <>
+
                     <NavDropdown title="Recommendations" id="appnavbar-recommendations-dropdown" data-testid="appnavbar-recommendations-dropdown" >
                       <NavDropdown.Item as={Link} to="/recommendations/list" data-testid="appnavbar-recommendations-list">List</NavDropdown.Item>
                       {
@@ -86,20 +86,22 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
                         )
                       }
                     </NavDropdown>
-                  
-
-                  <NavDropdown title="Menu Item" id="appnavbar-menu-item-dropdown" data-testid="appnavbar-menu-item-dropdown" >
-                  <NavDropdown.Item as={Link} to="/menuitem/list" data-testid="appnavbar-menu-item-list">List</NavDropdown.Item>
                 
-                </NavDropdown>
-                </>
                 )
               }
               {
-                    hasRole(currentUser, "ROLE_ADMIN") && (
+                hasRole(currentUser, "ROLE_USER") && (
+                  <NavDropdown title="Menu Item" id="appnavbar-menu-item-dropdown" data-testid="appnavbar-menu-item-dropdown" >
+                    <NavDropdown.Item as={Link} to="/menuitem/list" data-testid="appnavbar-menu-item-list">List</NavDropdown.Item>
+                
+                    {
+                      hasRole(currentUser, "ROLE_ADMIN") && (
                       <NavDropdown.Item as={Link} to="/menuitem/create" data-testid="appnavbar-menu-item-create">Create</NavDropdown.Item>
                     )
-                  }
+                    }
+                </NavDropdown>
+                )
+              }
               {
                 hasRole(currentUser, "ROLE_USER") && (
                   <NavDropdown title="HelpRequests" id="appnavbar-help-requests-dropdown" data-testid="appnavbar-help-requests-dropdown" >
