@@ -11,6 +11,7 @@ import DiningCommonsIndexPage from "main/pages/DiningCommons/DiningCommonsIndexP
 import DiningCommonsCreatePage from "main/pages/DiningCommons/DiningCommonsCreatePage";
 import DiningCommonsEditPage from "main/pages/DiningCommons/DiningCommonsEditPage";
 
+import OrganizationsIndexPage from "main/pages/Organizations/OrganizationsIndexPage";
 import MenuItemIndexPage from "main/pages/MenuItem/MenuItemIndexPage";
 import MenuItemCreatePage from "main/pages/MenuItem/MenuItemCreatePage";
 import MenuItemEditPage from "main/pages/MenuItem/MenuItemEditPage";
@@ -51,6 +52,15 @@ function App() {
             </>
           )
         }
+
+        {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/ucsborganization/list" element={<OrganizationsIndexPage />} />
+            </>
+          )
+        }
+
         {
           hasRole(currentUser, "ROLE_USER") && (
             <>
