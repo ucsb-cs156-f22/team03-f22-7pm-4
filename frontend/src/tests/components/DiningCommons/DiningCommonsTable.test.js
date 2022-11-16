@@ -69,7 +69,7 @@ describe("DiningCommonsTable tests", () => {
     );
 
 
-    const expectedHeaders = ['Code',  'Name', 'Sack Meal?','Takeout Meal?','Dining Cam?','Latitude','Longitude'];
+    const expectedHeaders = ['Code', 'Name', 'Sack Meal?','Takeout Meal?','Dining Cam?','Latitude','Longitude'];
     const expectedFields = ['code', 'name','hasSackMeal', 'hasTakeOutMeal','hasDiningCam','latitude','longitude'];
     const testId = "DiningCommonsTable";
 
