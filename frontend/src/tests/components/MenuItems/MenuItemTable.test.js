@@ -1,11 +1,9 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
-import { helpRequestsFixtures } from "fixtures/helpRequestsFixtures";
-import HelpRequestsTable from "main/components/HelpRequests/HelpRequestsTable";
+import { menuItemFixtures } from "fixtures/menuItemFixtures";
+import MenuItemTable from "main/components/MenuItem/MenuItemTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
-import axios from "axios";
-import AxiosMockAdapter from "axios-mock-adapter";
 
 
 const mockedNavigate = jest.fn();
@@ -15,20 +13,9 @@ jest.mock('react-router-dom', () => ({
     useNavigate: () => mockedNavigate
 }));
 
-const mockToast = jest.fn();
-
-jest.mock('react-toastify', () => {
-    const originalModule = jest.requireActual('react-toastify');
-    return {
-        __esModule: true,
-        ...originalModule,
-        toast: (x) => mockToast(x)
-    };
-});
-
-describe("HelpRequestsTable tests", () => {
+describe("MenuItemTable tests", () => {
   const queryClient = new QueryClient();
-  const axiosMock = new AxiosMockAdapter(axios);
+
 
   test("renders without crashing for empty table with user not logged in", () => {
     const currentUser = null;
@@ -36,7 +23,7 @@ describe("HelpRequestsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
+          <MenuItemTable menuItem ={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -48,7 +35,7 @@ describe("HelpRequestsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
+          <MenuItemTable menuItem={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -61,30 +48,29 @@ describe("HelpRequestsTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={[]} currentUser={currentUser} />
+          <MenuItemTable menuItem={[]} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
   });
 
-  test("Has the expected column headers and content for adminUser", () => {
+  test("Has the expected colum headers and content for adminUser", () => {
 
     const currentUser = currentUserFixtures.adminUser;
 
     const { getByText, getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={helpRequestsFixtures.threeRequests} currentUser={currentUser} />
+          <MenuItemTable menuItem={menuItemFixtures.threeMenuItems} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ['ID', 'Requester Email', 'Team ID', 'Table or breakout room', 'Explanation', 'Solved?', 'Request Time'];
-    const expectedFields = ['id', 'requesterEmail', 'teamId', 'tableOrBreakoutRoom', 'explanation', 'solved', 'requestTime'];
-
-    const testId = "HelpRequestsTable";
+    const expectedHeaders = ["id", "Dining Commons Code", "Name", "Station"];
+    const expectedFields = ["id", "diningCommonsCode", "name", "station"];
+    const testId = "MenuItemTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = getByText(headerText);
@@ -98,40 +84,35 @@ describe("HelpRequestsTable tests", () => {
 
     expect(getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
     expect(getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
-    expect(getByTestId(`${testId}-cell-row-0-col-requesterEmail`)).toHaveTextContent("agaucho@ucsb.edu");
-    expect(getByTestId(`${testId}-cell-row-1-col-requesterEmail`)).toHaveTextContent("bgaucho@ucsb.edu");
-    expect(getByTestId(`${testId}-cell-row-1-col-solved`)).toHaveTextContent("false");
-
+    
+    const editButton = getByTestId(`${testId}-cell-row-0-col-Edit-button`);
+    expect(editButton).toBeInTheDocument();
+    expect(editButton).toHaveClass("btn-primary");
+    
     const deleteButton = getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
 
   });
-
-  test("Delete button properly calls callback", async () => {
-
+  
+  test("Edit button navigates to the edit page for admin user", async () => {
     const currentUser = currentUserFixtures.adminUser;
-
-    axiosMock.onGet("/api/HelpRequest/all").reply(200, helpRequestsFixtures.threeRequests);
-    axiosMock.onDelete("/api/HelpRequest").reply(200, "HelpRequest with id 1 was deleted");
-
     const { getByTestId } = render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <HelpRequestsTable helpRequests={helpRequestsFixtures.threeRequests} currentUser={currentUser} />
+          <MenuItemTable menuItem={menuItemFixtures.threeMenuItems} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
-
     );
+    
+    await waitFor(() => {expect(getByTestId(`MenuItemTable-cell-row-0-col-id`)).toHaveTextContent("1");});
+    const editButton = getByTestId(`MenuItemTable-cell-row-0-col-Edit-button`);
+    expect(editButton).toBeInTheDocument();
 
-    await waitFor(() => { expect(getByTestId(`HelpRequestsTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
-
-    const deleteButton = getByTestId(`HelpRequestsTable-cell-row-0-col-Delete-button`);
-    expect(deleteButton).toBeInTheDocument();
-
-    fireEvent.click(deleteButton);
-
-    await waitFor(() => { expect(mockToast).toBeCalledWith("HelpRequest with id 1 was deleted") });
+    fireEvent.click(editButton);
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/menuitem/edit/1'));
+    
   });
-
+  
+  
 });
